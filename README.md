@@ -24,7 +24,7 @@ My goal was to have complete visibility into network interface traffic and to ar
 ## Phase 3: Traffic Generation & Log Verification
 - During testing the rule I configured, I noticed that my pings to my server did not show up. After searching, I realized that Linux OS shortcuts internal traffic; therefore, I had to ping an external IP (8.8.8.8) in order to force the packets to pass the network card where Suricata is able to see them.
 - I checked the fast.log file right after sending the ping, and it confirmed that Suricata caught the ping in both directions, showing my server's IP and Google's IP.
-![Suricata Fast Log Live Telemetry](img/fast_log_alerts.png)
+![Suricata Fast Log Live Telemetry](img/fast_log.png)
 
 ## Challenges Overcome & Lessons Learned 
 - Challenge 1: I tried testing Suricata after writing my rule and restarting it by pinging my server's own IP address. After checking the logs and expecting to see an alert, Suricata failed to catch the ping, or so I thought.
