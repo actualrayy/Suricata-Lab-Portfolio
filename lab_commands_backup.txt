@@ -1,0 +1,40 @@
+    1  sudo add-apt-respository ppa:oisf/suricata-stable -y
+    2  sudo add-apt-repository ppa:oisf/suricata-stable -y
+    3  sudo apt update
+    4  sudo apt install suricata jq -y
+    5  sudo sed -i 's/interface: eth0/interface: enp0s3/g' /etc/suricata/suricata.yaml
+    6  sudo suricata-update
+    7  sudo systemctl start suricata
+    8  sudo systemctl enable suricata
+    9  sudo systemctl status suricata
+   10  curl http://idstest.com/fake-user-agent
+   11  curl -I http://idstest.com/fake-user-agent
+   12  sudo tail -n 20 /var/log/suricata/fast.log
+   13  sudo nano /var/lib/suricata/rules/local.rules
+   14  sudo systemctl reload suricata
+   15  ping -c 4 192.168.0.1
+   16  sudo tail -n 20 /var/log/suricata/fast.log
+   17  echo 'alert icmp any any -> any any (msg:"LAB ALERT: Ping Detected!"; sid:1000001; rev:1;)' | sudo tee -a /var/lib/suricata/rules/suricata.ruleس
+   18  echo 'alert icmp any any -> any any (msg:"LAB ALERT: Ping Detected!"; sid:1000001; rev:1;)' | sudo tee -a /var/lib/suricata/rules/suricata.rules
+   19  sudo systemctl reload suricata
+   20  ping -c 4 127.0.0.1
+   21  sudo tail -n 15 /var/log/suricata/fast.log
+   22  ip route | grep default 
+   23  ping -c 4 192.168.0.55
+   24  sudo tail -n 20 /var/log/suricata/fast.log
+   25  sudo systemctl restart suricata
+   26  ping -c 4 192.168.0.55
+   27  sudo tail -n 15 /var/log/suricata/fast.log
+   28  tail -n 5 /var/lib/suricata/rules/suricata.rules
+   29  sudo tail -n 5 /var/lib/suricata/rules/suricata.rules
+   30  ping -c 4 8.8.8.8
+   31  sudo tail -n 15 /var/log/suricata/fast.log
+   32  sudo apt update && sudo apt install git -y
+   33  cd ~
+   34  mkdir Suricata-Lab-Portfolio
+   35  cd Suricata-Lab-Portfolio
+   36  git init -b maim
+   37  nano README.md
+   38  history 50 > lab_commands_backup.txt
+   39  history
+   40  history 150 > lab_commands_backup.txt
