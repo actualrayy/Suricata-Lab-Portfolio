@@ -35,3 +35,23 @@ My goal was to have complete visibility into network interface traffic and to ar
 - The fix: Instead of guessing what went wrong and having a chance of messing up the configurations, I decided to verify my files first. I ran `sudo tail -n 5` on the master rulebook file `(/var/lib/suricata/rules/suricata.rules)` to check what was written at the bottom. Seeing the custom rule there confirmed that the configuration I made was not the issue. This allowed me to focus on other things that might be the problem instead of second-guessing the syntax and focus mainly on troubleshooting the network traffic itself.
 
 
+## Technical Reference & Core Commands
+If you are looking to replicate this lab, these are the three main commands I used in the deployment and verification phases:
+
+*   **Rule Configuration:** Custom detection signatures were appended to the local rules engine definition file:
+    ```bash
+    sudo nano /var/lib/suricata/rules/local.rules
+    ```
+*   **Engine Verification:** Validated the rule syntax integrity before restarting the engine thread:
+    ```bash
+    sudo suricata -T -c /etc/suricata/suricata.yaml -v
+    ```
+*   **Log Inspection:** Monitored the real-time alert generation pipeline via standard output streams:
+    ```bash
+    tail -f /var/log/suricata/fast.log
+    ```
+
+    ## Future Enhancements & Scalability
+    This deployment successfully validates localized signature detection and rule engineering; the architecture can be scaled vertically and horizontally for enterprise environments:
+    1.  **Distributed Log Ingestion (SIEM Pipeline):** The logical next phase involves transitioning from localized flat-file logging (`fast.log`) to structured JSON telemetry distribution. Shipping `/var/log/suricata/eve.json` via a lightweight log forwarder (like Filebeat) into a centralized open-source SIEM (such as Wazuh or an ELK stack) will enable comprehensive dashboard visualizations, cross-log correlation, and long-term retention.
+    2.  **Advanced Rulesets & Behavioral Profiling:** Expand beyond basic ICMP tracking by implementing complex multi-layered rules targeting malicious user-agent strings, unauthorized DNS tunneling detection, and basic cross-site scripting (XSS) payload patterns.
